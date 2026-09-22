@@ -18,7 +18,7 @@ def strandize_country_names(df):
 def load_countries():
     df = load_csv("countries.csv")
     df = strandize_country_names(df)
-    return df
+    return None
 
 def load_crops_country():
     df = load_csv("crops_country.csv")
