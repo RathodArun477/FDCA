@@ -4,6 +4,7 @@ from Analysis import analyze_all_cuisine, full_analyze_recipe
 from Analysis import recipes_df
 from difflib import get_close_matches
 import matplotlib.pyplot as plt 
+import random
 
 
 # ---------------- FUZZY RECIPE MATCH ----------------
@@ -34,6 +35,7 @@ COUNTRY_ALIASES = {
     "u.s.": "united states",
     "uk": "united kingdom",
     "uae": "united arab emirates",
+    "nz" : "new zealand",
 }
 
 
