@@ -35,7 +35,6 @@ COUNTRY_ALIASES = {
     "u.s.": "united states",
     "uk": "united kingdom",
     "uae": "united arab emirates",
-    "nz" : "new zealand",
 }
 
 
