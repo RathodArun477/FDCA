@@ -1,0 +1,210 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&display=swap');
+
+:root {
+  --bg-canvas: #EAF0EB;
+  --text-primary: #0F2D1E;
+  --text-secondary: #2D5A43;
+  --text-muted: #4B6E59;
+  
+  --sage-main: #1A402E;
+  --sage-light: #E4ECE5;
+  --sage-border: #B4CDBA;
+  
+  --terracotta-main: #C05621;
+  --terracotta-dark: #9C3A10;
+  --terracotta-light: #FEECE3;
+  --terracotta-border: #F5C6AB;
+
+  --card-glass: rgba(255, 255, 255, 0.94);
+  --card-border: #CCDBCD;
+  --card-shadow: 0 10px 30px -5px rgba(20, 50, 35, 0.08), 0 4px 12px rgba(0, 0, 0, 0.03);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  background-color: var(--bg-canvas);
+  color: var(--text-primary);
+  line-height: 1.5;
+  min-height: 100vh;
+}
+
+/* Base Bento Grid layout */
+.bento-container {
+  max-width: 1250px;
+  margin: 0 auto;
+  padding: 2.5rem 1.5rem 4rem 1.5rem;
+}
+
+.bento-grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 1.25rem;
+}
+
+/* Glassmorphism Cards */
+.bento-card {
+  background: var(--card-glass);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-radius: 20px;
+  border: 1.5px solid var(--card-border);
+  box-shadow: var(--card-shadow);
+  padding: 1.6rem;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.bento-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 16px 36px -4px rgba(20, 50, 35, 0.12);
+  border-color: #9DBFA4;
+}
+
+.bento-hero {
+  background: linear-gradient(135deg, rgba(235, 244, 237, 0.96) 0%, rgba(255, 255, 255, 0.96) 100%);
+  border: 1.5px solid #B8D2BF;
+}
+
+.bento-terracotta {
+  background: linear-gradient(135deg, rgba(255, 245, 239, 0.96) 0%, rgba(255, 255, 255, 0.96) 100%);
+  border: 1.5px solid var(--terracotta-border);
+}
+
+/* Typography Utilities */
+.font-serif {
+  font-family: 'Playfair Display', serif;
+}
+
+.brand-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  background: #D5E2D7;
+  color: #1A402E;
+  font-size: 0.8rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  border-radius: 9999px;
+  border: 1.5px solid #AFC8B4;
+}
+
+.brand-badge-terracotta {
+  background: var(--terracotta-light);
+  color: var(--terracotta-dark);
+  border-color: var(--terracotta-border);
+}
+
+.card-title {
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 0.9rem;
+}
+
+/* Pills & Tags */
+.tag-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 13px;
+  margin: 4px;
+  background: var(--sage-light);
+  color: #143524;
+  border-radius: 9999px;
+  border: 1.5px solid var(--sage-border);
+  font-size: 0.85rem;
+  font-weight: 700;
+  transition: all 0.15s ease;
+}
+
+.tag-pill:hover {
+  background: #D2E2D5;
+  color: #0A1F15;
+}
+
+.tag-terracotta {
+  background: var(--terracotta-light);
+  color: var(--terracotta-dark);
+  border-color: var(--terracotta-border);
+}
+
+.tag-terracotta:hover {
+  background: #FDDEC0;
+}
+
+/* Search Input */
+.search-bar-wrap {
+  position: relative;
+  width: 100%;
+}
+
+.search-input {
+  width: 100%;
+  padding: 15px 22px 15px 50px;
+  border-radius: 16px;
+  border: 2px solid #AFC8B4;
+  background: #FFFFFF;
+  color: var(--text-primary);
+  font-size: 1.05rem;
+  font-weight: 600;
+  outline: none;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+  transition: all 0.2s ease;
+}
+
+.search-input:focus {
+  border-color: var(--sage-main);
+  box-shadow: 0 0 0 4px rgba(26, 64, 46, 0.15);
+}
+
+/* Buttons */
+.chip-btn {
+  background: #FFFFFF;
+  border: 1.5px solid var(--sage-border);
+  border-radius: 12px;
+  padding: 8px 16px;
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--sage-main);
+  cursor: pointer;
+  transition: all 0.15s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.chip-btn:hover {
+  background: var(--sage-light);
+  border-color: var(--sage-main);
+  color: #0A1F15;
+  transform: translateY(-1px);
+}
+
+/* Live Weather Banner */
+.weather-banner {
+  background: linear-gradient(90deg, #FFF6EF 0%, #FEEDE3 100%);
+  border-left: 6px solid var(--terracotta-main);
+  padding: 14px 20px;
+  border-radius: 14px;
+  margin-bottom: 1.25rem;
+  border-top: 1.5px solid var(--terracotta-border);
+  border-right: 1.5px solid var(--terracotta-border);
+  border-bottom: 1.5px solid var(--terracotta-border);
+  box-shadow: 0 4px 14px rgba(192, 86, 33, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+}
