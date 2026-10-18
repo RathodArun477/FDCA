@@ -1,8 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { 
   Search, Globe, Utensils, Sprout, Flame, Clock, Users, 
-  ArrowRight, CloudSun, Compass, ShieldCheck, Scale, Loader2 
+  ArrowRight, CloudSun, Compass, ShieldCheck, Scale, Loader2, PieChart as PieIcon, BarChart2
 } from 'lucide-react';
+import { 
+  PieChart, Pie, Cell, ResponsiveContainer, Tooltip as ChartTooltip, 
+  BarChart, Bar, XAxis, YAxis 
+} from 'recharts';
 
 const API_BASE = "http://localhost:8000";
 
@@ -309,7 +313,7 @@ export default function App() {
               </div>
 
               {/* Bottom Row: Climate-Aligned Crops vs Recipe Crops */}
-              <div className="bento-grid">
+              <div className="bento-grid" style={{ marginBottom: '1.25rem' }}>
                 <div className="bento-card" style={{ gridColumn: 'span 6' }}>
                   <h3 className="card-title">🌱 Climate-Aligned Native Crops</h3>
                   <div>
@@ -325,6 +329,57 @@ export default function App() {
                     {searchResult.data.crop_dependency.dominant_crops.map(crop => (
                       <span key={crop} className="tag-pill tag-terracotta">{crop}</span>
                     ))}
+                  </div>
+                </div>
+              </div>
+
+              {/* Interactive Visual Analytics Row (Recharts) */}
+              <div className="bento-grid">
+                <div className="bento-card" style={{ gridColumn: 'span 6' }}>
+                  <h3 className="card-title"><PieIcon size={20} /> Domestic vs. Imported Ratio</h3>
+                  <div style={{ height: '260px', width: '100%' }}>
+                    <ResponsiveContainer width="100%" height="100%">
+                      <PieChart>
+                        <Pie
+                          data={[
+                            { name: 'Domestic Crops', value: searchResult.data.crop_dependency.local_crops_used, color: '#1A402E' },
+                            { name: 'Imported Crops', value: searchResult.data.crop_dependency.imported_crops_used, color: '#C05621' }
+                          ]}
+                          dataKey="value"
+                          nameKey="name"
+                          cx="50%"
+                          cy="50%"
+                          innerRadius={65}
+                          outerRadius={95}
+                          paddingAngle={4}
+                          label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}
+                        >
+                          <Cell fill="#1A402E" />
+                          <Cell fill="#C05621" />
+                        </Pie>
+                        <ChartTooltip />
+                      </PieChart>
+                    </ResponsiveContainer>
+                  </div>
+                </div>
+
+                <div className="bento-card" style={{ gridColumn: 'span 6' }}>
+                  <h3 className="card-title"><BarChart2 size={20} /> Crop Occurrences in Cuisine</h3>
+                  <div style={{ height: '260px', width: '100%' }}>
+                    <ResponsiveContainer width="100%" height="100%">
+                      <BarChart 
+                        data={searchResult.data.crop_dependency.dominant_crops.slice(0, 6).map(crop => ({
+                          crop: crop.length > 14 ? crop.slice(0, 14) + '...' : crop,
+                          frequency: searchResult.data.crops_used_in_recipes.filter(c => c === crop).length || 1
+                        }))}
+                        margin={{ top: 20, right: 30, left: 10, bottom: 25 }}
+                      >
+                        <XAxis dataKey="crop" tick={{ fill: '#143524', fontSize: 12, fontWeight: 700 }} />
+                        <YAxis tick={{ fill: '#143524', fontSize: 12 }} />
+                        <ChartTooltip />
+                        <Bar dataKey="frequency" fill="#1A402E" radius={[8, 8, 0, 0]} />
+                      </BarChart>
+                    </ResponsiveContainer>
                   </div>
                 </div>
               </div>
